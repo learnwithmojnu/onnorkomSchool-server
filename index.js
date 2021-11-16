@@ -31,7 +31,7 @@ client.connect(err => {
     console.log(questions)
     questionsCollection.insertOne(questions)
       .then(result => {
-        res.redirect('http://localhost:3000/quiz');
+        res.redirect('https://onnorokom-school.web.app/AddQuestion');
       })
   })
   app.post('/score', (req, res) => {
