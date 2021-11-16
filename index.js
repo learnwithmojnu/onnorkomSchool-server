@@ -43,7 +43,7 @@ client.connect(err => {
   })
   app.get('/scores', (req, res) => {
     //console.log(req.query.email)
-    scoreCollection.find({})
+      scoreCollection.find({}).sort({score: -1})
       .toArray((err, documents) => {
         res.send(documents);
       })
