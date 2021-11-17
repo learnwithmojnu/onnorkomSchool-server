@@ -42,11 +42,18 @@ client.connect(err => {
       })
   })
   app.get('/scores', (req, res) => {
-    //console.log(req.query.email)
       scoreCollection.find({}).sort({score: -1})
       .toArray((err, documents) => {
         res.send(documents);
       })
+  })
+  app.get('/selfScores', (req, res) => {
+    console.log(req.query.email)
+    scoreCollection.find({email: req.query.email})
+    .toArray((err, documents) => {
+      res.send(documents);
+      console.log(documents);
+    })
   })
   app.get('/PBGS9', (req, res) => {
       questionsCollection.find({}).filter({"category": "PBGS9"})
@@ -54,6 +61,12 @@ client.connect(err => {
         res.send(documents);
       })
   })
+  app.get('/SC3', (req, res) => {
+    questionsCollection.find({}).filter({"category": "SC3"})
+    .toArray((err, documents) => {
+      res.send(documents);
+    })
+})
   app.delete('/delete/:id', (req, res) => {
     questionsCollection.deleteOne({ _id: ObjectId(req.params.id) })
       .then(result => {
