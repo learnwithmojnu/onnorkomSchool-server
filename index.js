@@ -21,7 +21,7 @@ client.connect(err => {
   const questionsCollection = client.db("onnoRokom").collection("questions");
   const scoreCollection = client.db("onnoRokom").collection("scores");
   app.get('/questions', (req, res) => {
-    questionsCollection.find({})
+    questionsCollection.find({}).filter({"category": "BCS"})
       .toArray((err, documents) => {
         res.send(documents);
       })
@@ -44,6 +44,12 @@ client.connect(err => {
   app.get('/scores', (req, res) => {
     //console.log(req.query.email)
       scoreCollection.find({}).sort({score: -1})
+      .toArray((err, documents) => {
+        res.send(documents);
+      })
+  })
+  app.get('/PBGS9', (req, res) => {
+      questionsCollection.find({}).filter({"category": "PBGS9"})
       .toArray((err, documents) => {
         res.send(documents);
       })
