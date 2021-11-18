@@ -73,6 +73,12 @@ app.get('/PB10', (req, res) => {
     res.send(documents);
   })
 })
+app.get('/SC2', (req, res) => {
+  questionsCollection.find({}).filter({"category": "SC2"})
+  .toArray((err, documents) => {
+    res.send(documents);
+  })
+})
   app.delete('/delete/:id', (req, res) => {
     questionsCollection.deleteOne({ _id: ObjectId(req.params.id) })
       .then(result => {
